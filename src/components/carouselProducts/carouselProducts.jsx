@@ -37,24 +37,18 @@ export default function ProductCarousel() {
           ))}
         </div>
       ))}
-
-      {/* flecha izquierda */}
       <button
         onClick={prev}
         className="absolute cursor-pointer -left-14 top-1/2 -translate-y-1/2 text-4xl z-20"
       >
         ❮
       </button>
-
-      {/* flecha derecha */}
       <button
         onClick={next}
         className="absolute cursor-pointer -right-14 top-1/2 -translate-y-1/2 text-4xl z-20"
       >
         ❯
       </button>
-
-      {/* indicadores */}
       <div className="flex justify-center gap-2 mt-8">
         {slides.map((_, i) => (
           <button

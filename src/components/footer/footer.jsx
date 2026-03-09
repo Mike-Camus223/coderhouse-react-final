@@ -3,12 +3,12 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer className="bg-black text-white mt-20">
+    <footer className="bg-black text-white">
       <div className="max-w-7xl mx-auto px-6 py-16 grid md:grid-cols-4 gap-12">
 
         {/* LOGO */}
         <div>
-          <h2 className="text-3xl font-bold tracking-widest">
+          <h2 className="text-3xl font-bold">
             Cafecito
           </h2>
         </div>

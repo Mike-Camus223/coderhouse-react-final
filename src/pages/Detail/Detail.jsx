@@ -2,8 +2,7 @@ import ItemDetailContainer from '../../components/ItemDetailContainer/ItemDetail
 
 const Detail = () => {
   return (
-    <div className="container">
-      {/* ItemDetailContainer maneja la lógica y pasa el producto a ItemDetail */}
+    <div>
       <ItemDetailContainer />
     </div>
   );
