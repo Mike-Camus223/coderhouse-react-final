@@ -15,13 +15,16 @@ const Navbar = () => {
           
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-4">
-              <Link to="/category/cafe" className="text-white tracking-widest scale-y-120 hover:text-amber-100 px-3 py-2 rounded-md text-sm font-medium">
+              <Link to="/productos" className="text-white tracking-widest scale-y-120 hover:text-amber-100 px-3 py-2 rounded-md text-sm font-medium">
+                Productos
+              </Link>
+              <Link to="/categoria/cafe" className="text-white tracking-widest scale-y-120 hover:text-amber-100 px-3 py-2 rounded-md text-sm font-medium">
                 Café
               </Link>
-              <Link to="/category/maquinas" className="text-white tracking-widest scale-y-120 hover:text-amber-100 px-3 py-2 rounded-md text-sm font-medium">
+              <Link to="/categoria/maquinas" className="text-white tracking-widest scale-y-120 hover:text-amber-100 px-3 py-2 rounded-md text-sm font-medium">
                 Máquinas
               </Link>
-              <Link to="/category/accesorios" className="text-white tracking-widest scale-y-120 hover:text-amber-100 px-3 py-2 rounded-md text-sm font-medium">
+              <Link to="/categoria/accesorios" className="text-white tracking-widest scale-y-120 hover:text-amber-100 px-3 py-2 rounded-md text-sm font-medium">
                 Accesorios
               </Link>
             </div>

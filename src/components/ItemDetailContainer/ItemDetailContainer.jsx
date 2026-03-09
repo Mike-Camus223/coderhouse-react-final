@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import ItemDetail from '../ItemDetail/ItemDetail';
-import { getProductById } from '../../data/products';
+import { getProductBySlug } from '../../data/products';
 import Spinner from '../spinner/spinner';
+import ItemDetail from '../itemdetail/ItemDetail';
+
 
 const ItemDetailContainer = () => {
-  const { id } = useParams();
+  const { slug } = useParams();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [fadeOut, setFadeOut] = useState(false);
@@ -14,7 +15,7 @@ const ItemDetailContainer = () => {
   useEffect(() => {
     let isMounted = true;
 
-    getProductById(id)
+    getProductBySlug(slug)
       .then((data) => {
         if (!isMounted) return;
         setProduct(data);
@@ -35,7 +36,7 @@ const ItemDetailContainer = () => {
     return () => {
       isMounted = false;
     };
-  }, [id]);
+  }, [slug]);
 
   if (loading)
     return (

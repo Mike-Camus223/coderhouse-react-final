@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const ItemCard = ({ product }) => {
   return (
     <Link
-      to={`/item/${product.id}`}
+      to={`/producto/${product.slug}`}
       className="block group"
     >
       <div>

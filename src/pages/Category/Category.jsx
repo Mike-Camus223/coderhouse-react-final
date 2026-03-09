@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import ItemListContainer from '../../components/ItemListContainer/ItemListContainer';
 
 const Category = () => {
-  const { categoryId } = useParams();
+  const { categoriaId } = useParams();
   
   const getCategoryName = (category) => {
     const categoryNames = {
@@ -18,8 +18,9 @@ const Category = () => {
     <div>
       {/* Pasamos categoryId para filtrar el listado */}
       <ItemListContainer 
-        greeting={`Categoría: ${getCategoryName(categoryId)}`}
-        categoryId={categoryId}
+        key={categoriaId || 'all'}
+        greeting={`Categoría: ${getCategoryName(categoriaId)}`}
+        categoryId={categoriaId}
       />
     </div>
   );

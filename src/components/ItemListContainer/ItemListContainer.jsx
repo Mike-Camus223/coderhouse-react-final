@@ -12,9 +12,6 @@ const ItemListContainer = ({ greeting, categoryId }) => {
   useEffect(() => {
     let isMounted = true;
 
-    setLoading(true);
-    setFadeOut(false);
-
     getProducts(categoryId)
       .then((data) => {
         if (!isMounted) return;

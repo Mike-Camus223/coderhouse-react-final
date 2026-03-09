@@ -21,19 +21,19 @@ const Footer = () => {
 
           <ul className="space-y-3 text-gray-300 text-sm">
             <li>
-              <Link to="/category/cafe" className="hover:text-white">
+              <Link to="/categoria/cafe" className="hover:text-white">
                 Café
               </Link>
             </li>
 
             <li>
-              <Link to="/category/maquinas" className="hover:text-white">
+              <Link to="/categoria/maquinas" className="hover:text-white">
                 Máquinas
               </Link>
             </li>
 
             <li>
-              <Link to="/category/accesorios" className="hover:text-white">
+              <Link to="/categoria/accesorios" className="hover:text-white">
                 Accesorios
               </Link>
             </li>

@@ -2,6 +2,7 @@ export const PRODUCTS = [
   { 
     id: 1,
     name: 'Café Colombiano',
+    slug: 'cafe-colombiano',
     price: 12500,
     category: 'cafe',
     stock: 15,
@@ -11,6 +12,7 @@ export const PRODUCTS = [
   { 
     id: 2,
     name: 'Café Espresso',
+    slug: 'cafe-espresso',
     price: 14800,
     category: 'cafe',
     stock: 10,
@@ -20,6 +22,7 @@ export const PRODUCTS = [
   { 
     id: 3,
     name: 'Café Descafeinado',
+    slug: 'cafe-descafeinado',
     price: 13200,
     category: 'cafe',
     stock: 8,
@@ -29,6 +32,7 @@ export const PRODUCTS = [
   { 
     id: 4,
     name: 'Máquina Espresso Pro',
+    slug: 'maquina-espresso-pro',
     price: 850000,
     category: 'maquinas',
     stock: 5,
@@ -38,6 +42,7 @@ export const PRODUCTS = [
   { 
     id: 5,
     name: 'Molino de Café',
+    slug: 'molino-de-cafe',
     price: 210000,
     category: 'maquinas',
     stock: 7,
@@ -47,6 +52,7 @@ export const PRODUCTS = [
   { 
     id: 6,
     name: 'Vaso Térmico',
+    slug: 'vaso-termico',
     price: 18000,
     category: 'accesorios',
     stock: 20,
@@ -56,6 +62,7 @@ export const PRODUCTS = [
   { 
     id: 7,
     name: 'Prensa Francesa',
+    slug: 'prensa-francesa',
     price: 42000,
     category: 'accesorios',
     stock: 12,
@@ -77,6 +84,13 @@ export async function getProductById(id) {
   // simulador fetch
   await delay(500);
   const product = PRODUCTS.find((p) => String(p.id) === String(id));
+  if (!product) throw new Error('Producto no encontrado');
+  return product;
+}
+
+export async function getProductBySlug(slug) {
+  await delay(500);
+  const product = PRODUCTS.find((p) => p.slug === slug);
   if (!product) throw new Error('Producto no encontrado');
   return product;
 }
