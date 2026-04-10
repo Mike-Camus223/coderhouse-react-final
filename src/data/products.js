@@ -74,14 +74,52 @@ export const PRODUCTS = [
 const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 
 export async function getProducts(categoryId) {
-  // simulador fetch
+  const { collection, getDocs, query, where } = await import('firebase/firestore');
+  const { getDb, isFirebaseConfigured } = await import('../firebase/firebase.js');
+
+  if (isFirebaseConfigured()) {
+    try {
+      const db = getDb();
+      if (db) {
+        const baseRef = collection(db, 'products');
+        const q = categoryId ? query(baseRef, where('category', '==', categoryId)) : baseRef;
+        const snap = await getDocs(q);
+
+        const data = snap.docs.map((d) => ({
+          id: d.id,
+          ...d.data(),
+        }));
+
+        return data;
+      }
+    } catch (e) {
+      // fallback al mock
+    }
+  }
+
   await delay(600);
   if (!categoryId) return PRODUCTS;
   return PRODUCTS.filter((p) => p.category === categoryId);
 }
 
 export async function getProductById(id) {
-  // simulador fetch
+  const { doc, getDoc } = await import('firebase/firestore');
+  const { getDb, isFirebaseConfigured } = await import('../firebase/firebase.js');
+
+  if (isFirebaseConfigured()) {
+    try {
+      const db = getDb();
+      if (db) {
+        const ref = doc(db, 'products', String(id));
+        const snap = await getDoc(ref);
+        if (!snap.exists()) throw new Error('Producto no encontrado');
+        return { id: snap.id, ...snap.data() };
+      }
+    } catch (e) {
+      // fallback al mock
+    }
+  }
+
   await delay(500);
   const product = PRODUCTS.find((p) => String(p.id) === String(id));
   if (!product) throw new Error('Producto no encontrado');
@@ -89,6 +127,28 @@ export async function getProductById(id) {
 }
 
 export async function getProductBySlug(slug) {
+  const { collection, getDocs, limit, query, where } = await import('firebase/firestore');
+  const { getDb, isFirebaseConfigured } = await import('../firebase/firebase.js');
+
+  if (isFirebaseConfigured()) {
+    try {
+      const db = getDb();
+      if (db) {
+        const q = query(
+          collection(db, 'products'),
+          where('slug', '==', slug),
+          limit(1)
+        );
+        const snap = await getDocs(q);
+        const first = snap.docs[0];
+        if (!first) throw new Error('Producto no encontrado');
+        return { id: first.id, ...first.data() };
+      }
+    } catch (e) {
+      // fallback al mock
+    }
+  }
+
   await delay(500);
   const product = PRODUCTS.find((p) => p.slug === slug);
   if (!product) throw new Error('Producto no encontrado');

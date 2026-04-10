@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import CartWidget from '../cartwidget/CartWidget';
+import CartSidebar from '../CartSidebar/CartSidebar.jsx';
 
 const Navbar = () => {
+  const [cartOpen, setCartOpen] = useState(false);
+
   return (
-    <nav className="bg-black shadow-lg sticky top-0 z-100">
-      <div className="max-w-7xl mx-auto px-4">
+    <>
+      <nav className="bg-black shadow-lg sticky top-0 z-40">
+        <div className="max-w-7xl mx-auto px-4">
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
             <Link to="/" className="text-white font-bold text-xl">
@@ -31,11 +35,14 @@ const Navbar = () => {
           </div>
           
           <div className="flex items-center">
-            <CartWidget />
+            <CartWidget onClick={() => setCartOpen(true)} />
           </div>
         </div>
       </div>
-    </nav>
+      </nav>
+
+      <CartSidebar open={cartOpen} onClose={() => setCartOpen(false)} />
+    </>
   );
 };
 

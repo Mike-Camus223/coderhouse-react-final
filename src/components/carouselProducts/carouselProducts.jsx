@@ -39,15 +39,43 @@ export default function ProductCarousel() {
       ))}
       <button
         onClick={prev}
-        className="absolute cursor-pointer -left-14 top-1/2 -translate-y-1/2 text-4xl z-20"
+        type="button"
+        aria-label="Anterior"
+        className="absolute cursor-pointer -left-14 top-1/2 -translate-y-1/2 z-20 p-2 rounded hover:bg-gray-100"
       >
-        ❮
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="28"
+          height="28"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path d="M15 18l-6-6 6-6" />
+        </svg>
       </button>
       <button
         onClick={next}
-        className="absolute cursor-pointer -right-14 top-1/2 -translate-y-1/2 text-4xl z-20"
+        type="button"
+        aria-label="Siguiente"
+        className="absolute cursor-pointer -right-14 top-1/2 -translate-y-1/2 z-20 p-2 rounded hover:bg-gray-100"
       >
-        ❯
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="28"
+          height="28"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path d="M9 18l6-6-6-6" />
+        </svg>
       </button>
       <div className="flex justify-center gap-2 mt-8">
         {slides.map((_, i) => (

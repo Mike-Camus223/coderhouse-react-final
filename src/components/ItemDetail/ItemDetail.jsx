@@ -1,14 +1,15 @@
 import { useState } from "react";
 import ItemCount from "../ItemCount/ItemCount";
+import { useCart } from "../../context/CartContext.jsx";
 
 const ItemDetail = ({ product }) => {
   const [accordionOpen, setAccordionOpen] = useState(false);
+  const { addItem } = useCart();
 
   if (!product) return null;
 
   const handleAddToCart = (quantity) => {
-    console.log(`Agregando ${quantity} unidades de ${product.name}`);
-    alert(`Se agregaron ${quantity} unidades al carrito`);
+    addItem(product, quantity);
   };
 
   return (
@@ -86,11 +87,13 @@ const ItemDetail = ({ product }) => {
 
           {/* CONTADOR */}
           <div className="mb-8">
-            <ItemCount
-              stock={product.stock}
-              initial={1}
-              onAdd={handleAddToCart}
-            />
+            {product.stock > 0 ? (
+              <ItemCount stock={product.stock} initial={1} onAdd={handleAddToCart} />
+            ) : (
+              <div className="rounded border border-red-200 bg-red-50 p-4 text-red-700">
+                Producto sin stock.
+              </div>
+            )}
           </div>
 
         </div>
