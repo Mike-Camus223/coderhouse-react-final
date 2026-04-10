@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useCart } from '../../context/CartContext.jsx';
+import { Trash2 } from 'lucide-react';
 
 function formatPrice(value) {
   const n = Number(value) || 0;
@@ -21,21 +22,21 @@ export default function CartSidebar({ open, onClose }) {
       />
 
       <aside className="absolute right-0 top-0 h-full w-full max-w-md bg-white shadow-xl flex flex-col">
-        <header className="flex items-center justify-between p-4 border-b">
-          <h2 className="text-lg font-semibold text-gray-800">Carrito</h2>
+        <header className="flex items-center bg-black justify-between p-4 border-b">
+          <h2 className="text-lg font-semibold text-white">Carrito</h2>
           <button
             type="button"
             onClick={onClose}
-            className="px-3 py-1 rounded hover:bg-gray-100 text-gray-700"
+            className="px-3 py-2 rounded hover:bg-gray-100 text-white rounded-full transition-all duration-300 ease-in-out cursor-pointer"
           >
-            Cerrar
+            X
           </button>
         </header>
 
         <div className="p-4 flex-1 overflow-auto">
           {items.length === 0 ? (
-            <div className="text-gray-600">
-              <p className="font-medium mb-2">Tu carrito está vacío.</p>
+            <div className="text-white">
+              <p className="font-medium text-black mb-2">Tu carrito está vacío.</p>
               <Link to="/productos" className="text-amber-700 underline" onClick={onClose}>
                 Ver productos
               </Link>
@@ -59,9 +60,10 @@ export default function CartSidebar({ open, onClose }) {
                       <button
                         type="button"
                         onClick={() => removeItem(item.id)}
-                        className="text-sm text-red-600 hover:underline"
+                        className="text-red-600 hover:text-red-800 rounded-full p-2 cursor-pointer rounded hover:bg-red-100 transition-all duration-300 ease-in-out"
+                        aria-label="Quitar producto"
                       >
-                        Quitar
+                        <Trash2 size={18} />
                       </button>
                     </div>
 
@@ -70,7 +72,7 @@ export default function CartSidebar({ open, onClose }) {
                         <button
                           type="button"
                           onClick={() => setItemQuantity(item.id, Math.max(1, item.quantity - 1))}
-                          className="w-8 h-8 border rounded hover:bg-gray-50"
+                          className="w-8 h-8 transition-all text-white duration-300 ease-in-out rounded bg-amber-700 hover:bg-amber-600 cursor-pointer"
                         >
                           -
                         </button>
@@ -80,7 +82,7 @@ export default function CartSidebar({ open, onClose }) {
                           onClick={() =>
                             setItemQuantity(item.id, Math.min(item.stock || item.quantity + 1, item.quantity + 1))
                           }
-                          className="w-8 h-8 border rounded hover:bg-gray-50"
+                          className="w-8 h-8 transition-all text-white duration-300 ease-in-out rounded bg-amber-700 hover:bg-amber-600 cursor-pointer"
                           disabled={item.stock ? item.quantity >= item.stock : false}
                         >
                           +
@@ -97,21 +99,21 @@ export default function CartSidebar({ open, onClose }) {
           )}
         </div>
 
-        <footer className="p-4 border-t">
+        <footer className="p-4 border-t bg-black">
           <div className="flex items-center justify-between mb-3">
-            <p className="text-gray-600">Items</p>
-            <p className="font-medium text-gray-800">{totalQuantity}</p>
+            <p className="text-white">Items</p>
+            <p className="font-medium text-white">{totalQuantity}</p>
           </div>
           <div className="flex items-center justify-between mb-4">
-            <p className="text-gray-600">Total</p>
-            <p className="text-lg font-semibold text-gray-900">${formatPrice(totalPrice)}</p>
+            <p className="text-white">Total</p>
+            <p className="text-lg  font-semibold text-white">${formatPrice(totalPrice)}</p>
           </div>
 
           <div className="flex gap-2">
             <button
               type="button"
               onClick={clearCart}
-              className="flex-1 border border-gray-300 rounded px-3 py-2 hover:bg-gray-50"
+              className="flex-1 border text-white cursor-pointer transition-colors ease-in-out duration-300 border-gray-300 rounded px-3 py-2 hover:bg-gray-50 hover:text-black"
               disabled={items.length === 0}
             >
               Vaciar
@@ -119,9 +121,8 @@ export default function CartSidebar({ open, onClose }) {
             <Link
               to="/checkout"
               onClick={onClose}
-              className={`flex-1 rounded px-3 py-2 text-center text-white ${
-                items.length === 0 ? 'bg-gray-300 pointer-events-none' : 'bg-amber-700 hover:bg-amber-600'
-              }`}
+              className={`flex-1 rounded px-3 py-2  transition-colors ease-in-out duration-300 text-center text-white ${items.length === 0 ? 'bg-gray-300 pointer-events-none' : 'bg-amber-700 hover:bg-amber-600'
+                }`}
             >
               Finalizar compra
             </Link>

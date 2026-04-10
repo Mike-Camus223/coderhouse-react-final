@@ -9,7 +9,7 @@ const CartWidget = ({ onClick }) => {
       <button
         type="button"
         onClick={onClick}
-        className="bg-amber-700 hover:bg-amber-600 text-white p-2 rounded-full transition-colors"
+        className="bg-amber-700 hover:bg-amber-600 cursor-pointer  text-white p-2 rounded-full transition-colors"
         aria-label="Abrir carrito"
       >
         

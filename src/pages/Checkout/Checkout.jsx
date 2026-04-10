@@ -63,91 +63,124 @@ export default function Checkout() {
 
   if (items.length === 0) {
     return (
-      <div className="max-w-3xl mx-auto px-4 py-14">
-        <h1 className="text-3xl font-semibold text-gray-800 mb-4">Checkout</h1>
-        <div className="rounded border p-6 bg-white">
-          <p className="text-gray-700 mb-3">Carrito vacío.</p>
-          <Link to="/productos" className="text-amber-700 underline">
-            Volver al catálogo
-          </Link>
-        </div>
+      <div className="max-w-4xl mx-auto px-4 py-20 text-center">
+        <h1 className="text-4xl font-bold text-gray-800 mb-4">Carrito vacío</h1>
+        <p className="text-gray-500 mb-6">No hay productos en tu carrito</p>
+        <Link
+          to="/productos"
+          className="bg-amber-700 text-white px-6 py-3 rounded-full hover:bg-amber-600 transition"
+        >
+          Ver productos
+        </Link>
       </div>
     );
   }
 
   return (
-    <div className="max-w-5xl mx-auto px-4 py-14">
-      <h1 className="text-3xl font-semibold text-gray-800 mb-8">Checkout</h1>
+    <div className="bg-gray-100 min-h-170 py-16">
+      <div className="max-w-6xl mx-auto px-4">
+        
+        <h1 className="text-4xl font-bold text-gray-800 mb-10">
+          Finalizar compra
+        </h1>
 
-      <div className="grid md:grid-cols-2 gap-8">
-        <form onSubmit={onSubmit} className="rounded border bg-white p-6">
-          <h2 className="text-lg font-semibold text-gray-800 mb-4">Datos del comprador</h2>
+        <div className="grid lg:grid-cols-2 gap-10">
 
-          <label className="block mb-3">
-            <span className="text-sm text-gray-600">Nombre</span>
-            <input
-              value={buyer.name}
-              onChange={(e) => setBuyer((b) => ({ ...b, name: e.target.value }))}
-              className="mt-1 w-full border rounded px-3 py-2"
-              type="text"
-              autoComplete="name"
-            />
-          </label>
-
-          <label className="block mb-3">
-            <span className="text-sm text-gray-600">Teléfono</span>
-            <input
-              value={buyer.phone}
-              onChange={(e) => setBuyer((b) => ({ ...b, phone: e.target.value }))}
-              className="mt-1 w-full border rounded px-3 py-2"
-              type="tel"
-              autoComplete="tel"
-            />
-          </label>
-
-          <label className="block mb-4">
-            <span className="text-sm text-gray-600">Email</span>
-            <input
-              value={buyer.email}
-              onChange={(e) => setBuyer((b) => ({ ...b, email: e.target.value }))}
-              className="mt-1 w-full border rounded px-3 py-2"
-              type="email"
-              autoComplete="email"
-            />
-          </label>
-
-          {error ? <p className="text-red-600 mb-3">{error}</p> : null}
-
-          <button
-            type="submit"
-            disabled={!canSubmit}
-            className={`w-full rounded px-4 py-2 text-white ${
-              canSubmit ? 'bg-amber-700 hover:bg-amber-600' : 'bg-gray-300'
-            }`}
+          {/* FORM */}
+          <form
+            onSubmit={onSubmit}
+            className="bg-white p-8 rounded-2xl shadow-md"
           >
-            {loading ? 'Procesando...' : 'Confirmar compra'}
-          </button>
-        </form>
+            <h2 className="text-xl font-semibold mb-6">
+              Datos del comprador
+            </h2>
 
-        <div className="rounded border bg-white p-6">
-          <h2 className="text-lg font-semibold text-gray-800 mb-4">Resumen</h2>
-          <ul className="space-y-2 mb-6">
-            {items.map((i) => (
-              <li key={i.id} className="flex items-center justify-between text-gray-700">
-                <span>
-                  {i.name} x{i.quantity}
-                </span>
-                <span>${formatPrice(i.price * i.quantity)}</span>
-              </li>
-            ))}
-          </ul>
-          <div className="flex items-center justify-between border-t pt-4">
-            <span className="text-gray-600">Total</span>
-            <span className="text-xl font-semibold text-gray-900">${formatPrice(totalPrice)}</span>
+            <div className="space-y-4">
+
+              <input
+                type="text"
+                placeholder="Nombre completo"
+                required
+                value={buyer.name}
+                onChange={(e) =>
+                  setBuyer((b) => ({ ...b, name: e.target.value }))
+                }
+                className="w-full border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-amber-500"
+              />
+
+              <input
+                type="tel"
+                placeholder="Teléfono"
+                required
+                value={buyer.phone}
+                onChange={(e) =>
+                  setBuyer((b) => ({ ...b, phone: e.target.value }))
+                }
+                className="w-full border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-amber-500"
+              />
+
+              <input
+                type="email"
+                placeholder="Email"
+                required
+                value={buyer.email}
+                onChange={(e) =>
+                  setBuyer((b) => ({ ...b, email: e.target.value }))
+                }
+                className="w-full border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-amber-500"
+              />
+
+            </div>
+
+            {error && (
+              <p className="text-red-500 mt-4">{error}</p>
+            )}
+
+            <button
+              type="submit"
+              disabled={!canSubmit}
+              className={`mt-6 w-full py-3 rounded-full font-semibold transition ${
+                canSubmit
+                  ? 'bg-amber-700 text-white hover:bg-amber-600'
+                  : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+              }`}
+            >
+              {loading ? 'Procesando...' : 'Confirmar compra'}
+            </button>
+          </form>
+
+          {/* RESUMEN */}
+          <div className="bg-white p-8 rounded-2xl shadow-md">
+            <h2 className="text-xl font-semibold mb-6">
+              Resumen del pedido
+            </h2>
+
+            <div className="space-y-4 max-h-64 overflow-y-auto pr-2">
+              {items.map((i) => (
+                <div
+                  key={i.id}
+                  className="flex justify-between text-gray-700"
+                >
+                  <span>
+                    {i.name} x{i.quantity}
+                  </span>
+                  <span className="font-medium">
+                    ${formatPrice(i.price * i.quantity)}
+                  </span>
+                </div>
+              ))}
+            </div>
+
+            <div className="border-t mt-6 pt-4 flex justify-between items-center">
+              <span className="text-gray-500">Total</span>
+              <span className="text-2xl font-bold text-gray-900">
+                ${formatPrice(totalPrice)}
+              </span>
+            </div>
           </div>
+
         </div>
       </div>
     </div>
   );
 }
-
